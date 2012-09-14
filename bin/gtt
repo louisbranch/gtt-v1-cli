@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require 'gtt'
+require File.expand_path('../../lib/gtt', __FILE__)
+
+cli = Gtt::Cli.new
+cli.parse

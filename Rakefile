@@ -17,10 +17,17 @@ Jeweler::Tasks.new do |gem|
   gem.name = "gtt"
   gem.homepage = "http://github.com/luizbranco/gtt"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = "Git Time Tracker"
+  gem.description = "Use your git commits to track how much time you spend coding."
   gem.email = "me@luizbranco.com"
   gem.authors = ["Luiz Branco"]
+  gem.executables = ["gtt"]
+  gem.files = [
+    "bin/gtt",
+    "lib/gtt.rb",
+    "lib/gtt/cli.rb"
+  ]
+  gem.require_paths = ["lib"]
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
