@@ -13,7 +13,6 @@ require 'rake'
 
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
-  # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "gtt"
   gem.homepage = "http://github.com/luizbranco/gtt"
   gem.license = "MIT"
@@ -22,13 +21,7 @@ Jeweler::Tasks.new do |gem|
   gem.email = "me@luizbranco.com"
   gem.authors = ["Luiz Branco"]
   gem.executables = ["gtt"]
-  gem.files = [
-    "bin/gtt",
-    "lib/gtt.rb",
-    "lib/gtt/cli.rb"
-  ]
-  gem.require_paths = ["lib"]
-  # dependencies defined in Gemfile
+  gem.files = Dir.glob('lib/**/*.rb')
 end
 Jeweler::RubygemsDotOrgTasks.new
 
