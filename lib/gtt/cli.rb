@@ -79,10 +79,14 @@ module Gtt
 
       end.parse!
 
-      Output.new(response).to_terminal
+      output.to_terminal(response)
     end
 
     private
+
+    def output
+      Output.new
+    end
 
     def tracker
       token = 'ABC' #Open config file

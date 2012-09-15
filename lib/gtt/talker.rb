@@ -2,12 +2,10 @@ module Gtt
 
   class Talker
 
-    def initialize(a,b)
-
+    def initialize(token,room)
     end
 
     def send_message(chat_message)
-
     end
 
   end

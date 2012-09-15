@@ -2,13 +2,7 @@ module Gtt
 
   class Output
 
-    attr_reader :json_response
-
-    def initialize(json_response)
-      @json_response = json_response
-    end
-
-    def to_terminal
+    def to_terminal(json_response)
       puts json_response
     end
 
