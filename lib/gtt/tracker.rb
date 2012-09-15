@@ -37,6 +37,14 @@ module Gtt
       request(:put, :tasks, {type: :end})
     end
 
+    def stats
+      request(:get, :stats)
+    end
+
+    def logs(n=10)
+      request(:get, :logs, {limit: n})
+    end
+
     private
 
     def request(method, resource, params={})
