@@ -41,7 +41,7 @@ module Gtt
 
     def request(method, resource, params={})
       body = { token: token }.merge(params)
-      HTTParty.send(method, "#{url}/#{resource}", {body})
+      HTTParty.send(method, "#{url}/#{resource}", {body: body})
     end
 
   end
