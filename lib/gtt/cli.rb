@@ -39,8 +39,8 @@ module Gtt
           response = tracker.commit_task(branch, commit_msg)
         end
 
-        opts.on("--start-task NAME", "Start a non-Git task") do |name|
-          response = tracker.start_task(name)
+        opts.on("--start-task DESCRIPTION", "Start a non-Git task") do |description|
+          response = tracker.start_task(description)
         end
 
         opts.on("--end-task", "End a non-Git task") do
@@ -61,8 +61,8 @@ module Gtt
           response = tracker.stats
         end
 
-        opts.on("-l", "--log [LIMIT]", "Specify the number of entries (default 10)") do |n|
-          response = n
+        opts.on("-l", "--log [LIMIT]", "List the lastest changes (default to 10)") do |n|
+          response = tracker.logs(n)
         end
 
         opts.separator ""
