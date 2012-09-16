@@ -1,6 +1,7 @@
 module Gtt
 
   require 'optparse'
+  require 'gtt/config'
   require 'gtt/tracker'
   require 'gtt/talker'
   require 'gtt/output'
@@ -20,8 +21,8 @@ module Gtt
         opts.separator ""
         opts.separator "Specific options:"
 
-        opts.on("--init TOKEN", "Initiate a new project, grab token at http://gtt.heroku.com") do |token|
-          print('Project initiated, config file created: .gtt', nil)
+        opts.on("--init GTT_TOKEN", "Initiate project, grab a free token at http://gtt.heroku.com") do |token|
+          Config.save(token)
         end
 
         opts.on("--start-day [CHAT_MESSAGE]", "Start a new working day") do |chat_msg|
@@ -36,7 +37,8 @@ module Gtt
 
         opts.on("-c", "--commit COMMIT_MESSAGE", "Create and commit Git task") do |commit_msg|
           branch = `git rev-parse --abbrev-ref HEAD`
-          response = tracker.commit_task(branch, commit_msg)
+          branch.gsub!(/\n/,'')
+          response = tracker.commit_task(commit_msg, branch)
         end
 
         opts.on("--start-task DESCRIPTION", "Start a non-Git task") do |description|
@@ -79,18 +81,18 @@ module Gtt
 
       end.parse!
 
-      output.to_terminal(response)
+      Output.new(response)
     end
 
     private
 
-    def output
-      Output.new
-    end
-
     def tracker
-      token = 'ABC' #Open config file
-      Tracker.new(token)
+      begin
+        token = Config.load
+        Tracker.new(token)
+      rescue
+        raise 'Invalid token, run -h for info'
+      end
     end
 
     def talker
