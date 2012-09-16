@@ -2,7 +2,7 @@ module Gtt
 
   class Output
 
-    def to_terminal(json_response)
+    def initialize(json_response)
       puts json_response
     end
 
