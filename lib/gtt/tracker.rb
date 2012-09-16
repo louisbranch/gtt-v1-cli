@@ -5,7 +5,7 @@ module Gtt
 
     attr_reader :token, :url
 
-    def initialize(token, url='http://gtt.heroku.com')
+    def initialize(token, url='http://localhost:9393')
       @token, @url = token, url
     end
 
@@ -17,8 +17,12 @@ module Gtt
       request(:put, :days)
     end
 
-    def commit_task(message)
-      request(:post, :tasks, {message: message, type: :commit})
+    def commit_task(message, branch=nil)
+      request(:post, :tasks, {
+        message: message,
+        type: :commit,
+        branch: branch
+      })
     end
 
     def start_task(message)
