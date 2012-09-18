@@ -9,6 +9,11 @@ module Gtt
       @token, @url = token, url
     end
 
+    def self.create_project
+      token = HTTParty.post('http://localhost:9393/projects')
+      token
+    end
+
     def start_day
       request(:post, :days)
     end

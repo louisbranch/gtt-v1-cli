@@ -21,8 +21,10 @@ module Gtt
         opts.separator ""
         opts.separator "Specific options:"
 
-        opts.on("--init GTT_TOKEN", "Initiate project, grab a free token at http://gtt.heroku.com") do |token|
+        opts.on("--init", "Initiate a new project") do
+          token = Tracker.create_project
           Config.save(token)
+          response = 'Project initiated'
         end
 
         opts.on("--start-day [CHAT_MESSAGE]", "Start a new working day") do |chat_msg|
