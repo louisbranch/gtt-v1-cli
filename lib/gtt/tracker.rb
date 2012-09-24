@@ -33,28 +33,39 @@ module Gtt
 
     def start_task(message)
       request(:post, "/days/#{date}/tasks", {
-        message: message
+        message: message,
+          type: :start,
+          time: time
       })
     end
 
     def pause_task
-      request(:put, :tasks, {type: :pause})
+      request(:post, "/days/#{date}/tasks", {
+        type: :pause,
+          time: time
+      })
     end
 
     def resume_task
-      request(:put, :tasks, {type: :resume})
+      request(:post, "/days/#{date}/tasks", {
+        type: :pause,
+          time: time
+      })
     end
 
     def end_task
-      request(:put, :tasks, {type: :end})
+      request(:post, "/days/#{date}/tasks", {
+        type: :end,
+          time: time
+      })
     end
 
     def stats
-      request(:get, :stats)
+      request(:get, '/stats')
     end
 
     def logs(n=10)
-      request(:get, :logs, {limit: n})
+      request(:get, '/logs', {limit: n})
     end
 
     private
