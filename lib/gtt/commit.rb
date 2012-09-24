@@ -10,15 +10,18 @@ module Gtt
     end
 
     def save
-      tracker.commit_task(message, branch)
-      commit!
+      if commit!
+        tracker.commit_task(message, branch)
+      else
+        "Commit has failed"
+      end
     end
 
     private
 
     def commit!
       command = "git commit -m \"#{message}\""
-      exec command
+      system(command)
     end
 
     def branch
