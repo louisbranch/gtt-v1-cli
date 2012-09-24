@@ -27,12 +27,14 @@ module Gtt
         message: message,
         type: :commit,
         branch: branch,
-        end: time
+        time: time
       })
     end
 
     def start_task(message)
-      request(:post, :tasks, {message: message})
+      request(:post, "/days/#{date}/tasks", {
+        message: message
+      })
     end
 
     def pause_task
