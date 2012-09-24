@@ -15,18 +15,19 @@ module Gtt
     end
 
     def start_day
-      request(:post, :days)
+      request(:put, "/days/#{date}", {start: time})
     end
 
     def end_day
-      request(:put, :days)
+      request(:put, "/days/#{date}", {end: time})
     end
 
     def commit_task(message, branch=nil)
-      request(:post, :tasks, {
+      request(:post, "/days/#{date}/tasks", {
         message: message,
         type: :commit,
-        branch: branch
+        branch: branch,
+        end: time
       })
     end
 
@@ -56,9 +57,18 @@ module Gtt
 
     private
 
-    def request(method, resource, params={})
+    def request(method, path, params={})
       body = { token: token }.merge(params)
-      HTTParty.send(method, "#{url}/#{resource}", {body: body})
+      full_path = url + '/projects/scaffold' + path
+      HTTParty.send(method, full_path, {body: body})
+    end
+
+    def date
+      Time.now.strftime('%Y-%m-%d')
+    end
+
+    def time
+      Time.now.strftime('%H:%M')
     end
 
   end
