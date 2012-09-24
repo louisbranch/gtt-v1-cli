@@ -5,6 +5,7 @@ module Gtt
   require 'gtt/tracker'
   require 'gtt/talker'
   require 'gtt/output'
+  require 'gtt/commit'
   class Cli
 
     def parse
@@ -38,9 +39,8 @@ module Gtt
         end
 
         opts.on("-c", "--commit COMMIT_MESSAGE", "Create and commit Git task") do |commit_msg|
-          branch = `git rev-parse --abbrev-ref HEAD`
-          branch.gsub!(/\n/,'')
-          response = tracker.commit_task(commit_msg, branch)
+          commit = Commit.new(commit_msg, tracker)
+          response = commit.save
         end
 
         opts.on("--start-task DESCRIPTION", "Start a non-Git task") do |description|
