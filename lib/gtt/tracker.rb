@@ -48,14 +48,7 @@ module Gtt
 
     def resume_task
       request(:post, "/days/#{date}/tasks", {
-        type: :pause,
-          time: time
-      })
-    end
-
-    def end_task
-      request(:post, "/days/#{date}/tasks", {
-        type: :end,
+        type: :resume,
           time: time
       })
     end

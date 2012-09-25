@@ -43,12 +43,8 @@ module Gtt
           response = commit.save
         end
 
-        opts.on("--start-task DESCRIPTION", "Start a non-Git task") do |description|
+        opts.on("-t", "--start-task DESCRIPTION", "Start a non-Git task") do |description|
           response = tracker.start_task(description)
-        end
-
-        opts.on("--end-task", "End a non-Git task") do
-          response = tracker.end_task
         end
 
         opts.on("-p", "--pause [CHAT_MESSAGE]", "Pause current task") do |chat_msg|
@@ -57,7 +53,7 @@ module Gtt
         end
 
         opts.on("-r", "--resume [CHAT_MESSAGE]", "Resume current task") do |chat_msg|
-          response = tracker.pause_task
+          response = tracker.resume_task
           talker.send_message(chat_msg)
         end
 
