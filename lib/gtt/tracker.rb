@@ -34,7 +34,7 @@ module Gtt
     def start_task(message)
       request(:post, "/days/#{date}/tasks", {
         message: message,
-          type: :start,
+          type: :task,
           time: time
       })
     end
