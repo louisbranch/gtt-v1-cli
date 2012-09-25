@@ -2,8 +2,12 @@ module Gtt
 
   class Output
 
-    def initialize(json_response)
-      puts json_response
+    def initialize(response)
+      if response['ok']
+        puts 'OK!'
+      else
+        puts "ERROR: #{response['message']}"
+      end
     end
 
   end
