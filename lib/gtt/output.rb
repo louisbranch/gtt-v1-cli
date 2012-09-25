@@ -1,12 +1,14 @@
 module Gtt
 
+  require 'rainbow'
   class Output
 
     def initialize(response)
       if response['ok']
-        puts 'OK!'
+        puts 'OK!'.color(:green)
       else
-        puts "ERROR: #{response['message']}"
+        error = "ERROR:".color(:red)
+        puts "#{error} #{response['message']}"
       end
     end
 

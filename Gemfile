@@ -1,5 +1,7 @@
 source :rubygems
+
 gem "httparty", ">= 0.9.0"
+gem "rainbow", ">= 1.1.4"
 
 group :development do
   gem "rspec", "~> 2.8.0"
