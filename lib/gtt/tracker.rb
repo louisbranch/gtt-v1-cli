@@ -34,22 +34,22 @@ module Gtt
     def start_task(message)
       request(:post, "/days/#{date}/tasks", {
         message: message,
-          type: :task,
-          time: time
+        type: :task,
+        time: time
       })
     end
 
     def pause_task
       request(:post, "/days/#{date}/tasks", {
         type: :pause,
-          time: time
+        time: time
       })
     end
 
     def resume_task
       request(:post, "/days/#{date}/tasks", {
         type: :resume,
-          time: time
+        time: time
       })
     end
 

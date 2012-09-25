@@ -13,7 +13,7 @@ module Gtt
       if commit!
         tracker.commit_task(message, branch)
       else
-        "Commit has failed"
+        {error: true, message: 'Commit has failed!'}
       end
     end
 
