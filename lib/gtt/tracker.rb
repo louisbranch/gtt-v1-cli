@@ -54,7 +54,7 @@ module Gtt
     end
 
     def stats
-      request(:get, '/stats')
+      request(:get, "/days/#{date}")
     end
 
     def logs(n=10)
