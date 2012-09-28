@@ -40,14 +40,14 @@ module Gtt
     end
 
     def pause_task
-      request(:post, "/days/#{date}/tasks", {
+      request(:post, "/days/#{date}/breaks", {
         type: :pause,
         time: time
       })
     end
 
     def resume_task
-      request(:post, "/days/#{date}/tasks", {
+      request(:post, "/days/#{date}/breaks", {
         type: :resume,
         time: time
       })
