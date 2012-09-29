@@ -24,17 +24,19 @@ module Gtt
 
         opts.on("--init", "Initiate a new project") do
           token = Tracker.create_project
-          Config.save(token)
+          Config.save_token(token)
           response = 'Project initiated'
         end
 
         opts.on("--start-day [CHAT_MESSAGE]", "Start a new working day") do |chat_msg|
           response = tracker.start_day
+          chat_msg ||= 'Morning o/'
           talker.send_message(chat_msg)
         end
 
         opts.on("--end-day [CHAT_MESSAGE]", "End a working day") do |chat_msg|
           response = tracker.end_day
+          chat_msg ||= 'heading out o/'
           talker.send_message(chat_msg)
         end
 
@@ -49,11 +51,13 @@ module Gtt
 
         opts.on("-p", "--pause [CHAT_MESSAGE]", "Pause current task") do |chat_msg|
           response = tracker.pause_task
+          chat_msg ||= 'brb'
           talker.send_message(chat_msg)
         end
 
         opts.on("-r", "--resume [CHAT_MESSAGE]", "Resume current task") do |chat_msg|
           response = tracker.resume_task
+          chat_msg ||= 'back'
           talker.send_message(chat_msg)
         end
 
@@ -86,7 +90,7 @@ module Gtt
 
     def tracker
       begin
-        token = Config.load
+        token = Config.load_token
         Tracker.new(token)
       rescue
         raise 'Invalid token, run -h for info'
@@ -94,9 +98,8 @@ module Gtt
     end
 
     def talker
-      campfire_token = 'ABC' #Open config file
-      campfire_room = 'ABC' #Open config file
-      Talker.new(campfire_token, campfire_room)
+      config = Config.load_campfire
+      Talker.new(config[:token], config[:subdomain], config[:room_id])
     end
 
   end
