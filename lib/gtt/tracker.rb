@@ -23,7 +23,7 @@ module Gtt
         message: message,
         type: :commit,
         branch: branch,
-        time: time
+        end: time
       })
     end
 
@@ -31,21 +31,21 @@ module Gtt
       request(:post, "/days/#{date}/tasks", {
         message: message,
         type: :task,
-        time: time
+        end: time
       })
     end
 
     def pause_task
       request(:post, "/days/#{date}/breaks", {
         type: :pause,
-        time: time
+        end: time
       })
     end
 
     def resume_task
       request(:post, "/days/#{date}/breaks", {
         type: :resume,
-        time: time
+        end: time
       })
     end
 
