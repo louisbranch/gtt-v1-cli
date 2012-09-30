@@ -64,9 +64,9 @@ module Gtt
           response = tracker.stats
         end
 
-        opts.on("-l", "--log [LIMIT]", "List the lastest changes (default to 10)") do |n|
-          response = tracker.logs(n)
-        end
+        #opts.on("-l", "--log [LIMIT]", "List the lastest changes (default to 10)") do |n|
+        #  response = tracker.logs(n)
+        #end
 
         opts.separator ""
         opts.separator "Common options:"
