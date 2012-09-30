@@ -2,6 +2,38 @@
 
 Use your git commits to track how much time you spend coding.
 
+== Using gtt
+
+First make sure you have ruby installed and install the gem:
+
+    gem install gtt
+
+=== Initiating a new Project
+
+    gtt --init
+
+If you don't have a token yet, hold tight, we will start the open beta soon.
+
+=== Starting and ending a day
+
+    gtt --start-day 'message'
+
+    gtt --end-day 'message'
+
+The message is optional and it is used to ping Campfire.
+
+=== Finishing a task
+
+When is a git task, you do:
+
+    gtt --commit 'message' // or -c for short
+
+Behind the scenes gtt does a git commit -m with the same message you pass to it.
+
+When is not a git task:
+
+    gtt --task 'message' // or -t for short
+
 == Contributing to gtt
 
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
@@ -15,4 +47,3 @@ Use your git commits to track how much time you spend coding.
 == Copyright
 
 Copyright (c) 2012 Luiz Branco. See LICENSE.txt for further details.
-
