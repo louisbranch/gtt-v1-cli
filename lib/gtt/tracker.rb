@@ -38,7 +38,7 @@ module Gtt
     def pause_task
       request(:post, "/days/#{date}/breaks", {
         type: :pause,
-        end: time
+        start: time
       })
     end
 
