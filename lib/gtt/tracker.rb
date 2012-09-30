@@ -18,6 +18,7 @@ module Gtt
       request(:put, "/days/#{date}", {end: time})
     end
 
+    # TODO Remove type attr
     def commit_task(message, branch=nil)
       request(:post, "/days/#{date}/tasks", {
         message: message,
@@ -27,6 +28,7 @@ module Gtt
       })
     end
 
+    # TODO Remove type attr
     def start_task(message)
       request(:post, "/days/#{date}/tasks", {
         message: message,
@@ -35,6 +37,7 @@ module Gtt
       })
     end
 
+    # TODO Remove type attr
     def pause_task
       request(:post, "/days/#{date}/breaks", {
         type: :pause,
@@ -42,6 +45,7 @@ module Gtt
       })
     end
 
+    # TODO Remove type attr
     def resume_task
       request(:post, "/days/#{date}/breaks", {
         type: :resume,
