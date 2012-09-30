@@ -30,13 +30,13 @@ module Gtt
         opts.on("--start-day [CHAT_MESSAGE]", "Start a new working day") do |chat_msg|
           response = tracker.start_day
           chat_msg ||= 'Morning o/'
-          talker.send_message(chat_msg)
+          talker.send_message(chat_msg) if talker
         end
 
         opts.on("--end-day [CHAT_MESSAGE]", "End a working day") do |chat_msg|
           response = tracker.end_day
           chat_msg ||= 'heading out o/'
-          talker.send_message(chat_msg)
+          talker.send_message(chat_msg) if talker
         end
 
         opts.on("-c", "--commit COMMIT_MESSAGE", "Create and commit Git task") do |commit_msg|
@@ -51,13 +51,13 @@ module Gtt
         opts.on("-p", "--pause [CHAT_MESSAGE]", "Pause current task") do |chat_msg|
           response = tracker.pause_task
           chat_msg ||= 'brb'
-          talker.send_message(chat_msg)
+          talker.send_message(chat_msg) if talker
         end
 
         opts.on("-r", "--resume [CHAT_MESSAGE]", "Resume current task") do |chat_msg|
           response = tracker.resume_task
           chat_msg ||= 'back'
-          talker.send_message(chat_msg)
+          talker.send_message(chat_msg) if talker
         end
 
         opts.on("-s", "--stats", "Show working day stats") do
@@ -99,7 +99,9 @@ module Gtt
     def talker
       begin
         config = Config.load_campfire
-        Talker.new(config[:token], config[:subdomain], config[:room_id])
+        if config
+          Talker.new(config[:token], config[:subdomain], config[:room_id])
+        end
       rescue
         raise 'Invalid campfire credentials, run -h for info'
       end
