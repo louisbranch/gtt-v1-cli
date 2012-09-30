@@ -21,7 +21,9 @@ module Gtt
       project = $1
       config.match(/^GTT_TOKEN=(.*)/)
       token = $1
-      {project: project, token: token}
+      if token && project
+        {project: project, token: token}
+      end
     end
 
     def self.load_campfire
@@ -32,7 +34,9 @@ module Gtt
       subdomain = $1
       config.match(/^CAMPFIRE_ROOM_ID=(.*)/)
       room_id = $1
-      {token: token, subdomain: subdomain, room_id: room_id}
+      if token && subdomain && room_id
+        {token: token, subdomain: subdomain, room_id: room_id}
+      end
     end
 
   end
