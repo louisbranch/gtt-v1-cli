@@ -3,16 +3,24 @@ module Gtt
   require 'rainbow'
   class Output
 
+    attr_reader :response
+
     def initialize(response)
+      @response = response
+    end
+
+    def to_terminal
       if response['ok']
         output = render_success(response)
       elsif response['error']
         output = render_error(response)
       else
-        output = 'Unknown message'.color(:yellow)
+        output = response['message']
       end
       puts output
     end
+
+    private
 
     def render_success(response)
       output = 'OK! '.color(:green)

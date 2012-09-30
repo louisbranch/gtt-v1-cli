@@ -5,13 +5,9 @@ module Gtt
 
     attr_reader :token, :url
 
-    def initialize(token, url='http://localhost:9393')
-      @token, @url = token, url
-    end
-
-    def self.create_project
-      token = HTTParty.post('http://localhost:9393/projects')
-      token
+    def initialize(project, token, url='http://localhost:9393')
+      @token = token
+      @url = "#{url}/projects/#{project}"
     end
 
     def start_day
@@ -64,9 +60,8 @@ module Gtt
     private
 
     def request(method, path, params={})
-      body = { token: token }.merge(params)
-      full_path = url + '/projects/scaffold' + path
-      HTTParty.send(method, full_path, {body: body})
+      full_path = "#{url}#{path}/?token=#{token}"
+      HTTParty.send(method, full_path, {body: params})
     end
 
     def date

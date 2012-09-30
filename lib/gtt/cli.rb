@@ -10,7 +10,7 @@ module Gtt
 
     def parse
 
-      response = "Type -h for help"
+      response = {'message' => "Type -h for help"}
 
       OptionParser.new do |opts|
         opts.banner = <<-EOF.gsub(/^\s+/, "")
@@ -22,10 +22,9 @@ module Gtt
         opts.separator ""
         opts.separator "Specific options:"
 
-        opts.on("--init", "Initiate a new project") do
-          token = Tracker.create_project
-          Config.save_token(token)
-          response = 'Project initiated'
+        opts.on("--init", "Create new project config file") do
+          Config.start
+          response = {'ok' => true, 'message' => 'Project initiated'}
         end
 
         opts.on("--start-day [CHAT_MESSAGE]", "Start a new working day") do |chat_msg|
@@ -73,33 +72,37 @@ module Gtt
         opts.separator "Common options:"
 
         opts.on("-h", "--help", "Show this message") do
-          response = opts
+          response = {'message' => opts}
         end
 
         opts.on("-v", "--version", "Show version number") do
           version = File.exist?('VERSION') ? File.read('VERSION') : ""
-          response = "v#{version}"
+          response = {'message' => "v#{version}"}
         end
 
       end.parse!
 
-      Output.new(response)
+      Output.new(response).to_terminal
     end
 
     private
 
     def tracker
       begin
-        token = Config.load_token
-        Tracker.new(token)
+        config = Config.load_project
+        Tracker.new(config[:project], config[:token])
       rescue
-        raise 'Invalid token, run -h for info'
+        raise 'Invalid project credentials, run -h for info'
       end
     end
 
     def talker
-      config = Config.load_campfire
-      Talker.new(config[:token], config[:subdomain], config[:room_id])
+      begin
+        config = Config.load_campfire
+        Talker.new(config[:token], config[:subdomain], config[:room_id])
+      rescue
+        raise 'Invalid campfire credentials, run -h for info'
+      end
     end
 
   end
