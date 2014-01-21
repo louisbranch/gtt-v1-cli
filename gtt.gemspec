@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "gtt"
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Luiz Branco"]
-  s.date = "2013-06-10"
+  s.date = "2014-01-21"
   s.description = "Use your git commits to track how much time you spend coding."
   s.email = "me@luizbranco.com"
   s.executables = ["gtt"]
