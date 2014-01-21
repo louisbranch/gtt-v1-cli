@@ -10,7 +10,6 @@ module Gtt
         f.write("# GTT_TOKEN=\n")
         f.write("\n# Optional:\n")
         f.write("# CAMPFIRE_TOKEN=\n")
-        f.write("# CAMPFIRE_SUBDOMAIN=\n")
         f.write("# CAMPFIRE_ROOM_ID=\n")
       end
     end
@@ -30,12 +29,10 @@ module Gtt
       config = File.read('.gtt')
       config.match(/^CAMPFIRE_TOKEN=(.*)/)
       token = $1
-      config.match(/^CAMPFIRE_SUBDOMAIN=(.*)/)
-      subdomain = $1
       config.match(/^CAMPFIRE_ROOM_ID=(.*)/)
       room_id = $1
-      if token && subdomain && room_id
-        {token: token, subdomain: subdomain, room_id: room_id}
+      if token && room_id
+        {token: token, room_id: room_id}
       end
     end
 

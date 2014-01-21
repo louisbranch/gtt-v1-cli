@@ -6,9 +6,9 @@ module Gtt
 
     attr_reader :auth, :url
 
-    def initialize(token, subdomain, room_id)
+    def initialize(token, room_id)
       @auth = {username: token, password: 'X'}
-      @url = "https://#{subdomain}.campfirenow.com/room/#{room_id}/speak.json"
+      @url = "https://api-campfire.hipchat.com/room/#{room_id}/speak.json"
     end
 
     def send_message(chat_message)

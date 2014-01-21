@@ -100,7 +100,7 @@ module Gtt
       begin
         config = Config.load_campfire
         if config
-          Talker.new(config[:token], config[:subdomain], config[:room_id])
+          Talker.new(config[:token], config[:room_id])
         end
       rescue
         raise 'Invalid campfire credentials, run -h for info'
